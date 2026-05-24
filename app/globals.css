@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #080b0f;
+  --surface: #0d1219;
+  --surface2:#121a24;
+  --border:  #1e2d3d;
+  --accent:  #a3ff47;
+  --rust:    #c95c1a;
+  --slate:   #7a9ab5;
+  --text:    #e8edf2;
+  --muted:   #4a6278;
+  --mono:    'Space Mono', monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Grid bg */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Markdown prose */
+.prose h1 { font-size: 1.4rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: var(--accent); border-bottom: 1px solid rgba(163,255,71,0.25); padding-bottom: 0.5rem; letter-spacing: 0.04em; }
+.prose h2 { font-size: 1.1rem; font-weight: 700; margin: 1.25rem 0 0.5rem; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; }
+.prose h3 { font-size: 0.85rem; font-weight: 700; margin: 1rem 0 0.4rem; color: var(--slate); text-transform: uppercase; letter-spacing: 0.08em; }
+.prose p  { margin: 0.4rem 0; color: rgba(232,237,242,0.75); line-height: 1.7; font-size: 13px; }
+.prose ul, .prose ol { margin: 0.4rem 0 0.4rem 1.25rem; color: rgba(232,237,242,0.75); }
+.prose li { margin: 0.15rem 0; font-size: 13px; }
+.prose code { background: var(--surface2); color: var(--accent); padding: 1px 5px; font-family: var(--mono); font-size: 0.85em; }
+.prose pre  { background: var(--surface2); border: 1px solid var(--border); padding: 1rem; overflow-x: auto; margin: 0.75rem 0; }
+.prose pre code { background: none; padding: 0; color: rgba(163,255,71,0.65); }
+.prose a  { color: var(--slate); text-decoration: underline; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.prose strong { color: var(--text); font-weight: 700; }
+.prose blockquote { border-left: 3px solid var(--rust); padding-left: 1rem; color: var(--muted); margin: 0.75rem 0; }
+.prose table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 12px; }
+.prose th { background: var(--surface2); padding: 7px 10px; border: 1px solid var(--border); text-align: left; color: var(--slate); letter-spacing: 0.06em; }
+.prose td { padding: 7px 10px; border: 1px solid var(--border); color: rgba(232,237,242,0.75); }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
