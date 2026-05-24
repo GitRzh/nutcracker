@@ -118,22 +118,6 @@ Open `http://localhost:3000`. Done.
 
 ---
 
-## Deploy to Netlify
-
-```bash
-git add .
-git commit -m "initial commit"
-git push origin main
-```
-
-Then on [netlify.com](https://netlify.com):
-1. **Add new site** → **Import an existing project** → connect your repo
-2. Build settings are auto-detected from `netlify.toml`
-3. Add environment variable: `GROQ_API_KEY=your_key`
-4. Click **Deploy**
-
----
-
 ## Caution
 
 A few things to know:
