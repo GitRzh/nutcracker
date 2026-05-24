@@ -7,7 +7,9 @@ function getKey() {
   return key;
 }
 
-async function query(prompt: string, json = false): Promise<string> {
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+async function query(prompt: string, json = false, retries = 3): Promise<string> {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: {
@@ -22,6 +24,15 @@ async function query(prompt: string, json = false): Promise<string> {
       ...(json && { response_format: { type: "json_object" } }),
     }),
   });
+
+  if (res.status === 429 && retries > 0) {
+    // Parse retry delay from response if available, default to 10s
+    const err = await res.json().catch(() => ({}));
+    const retryAfter = err?.error?.message?.match(/in (\d+(\.\d+)?)s/)?.[1];
+    const waitMs = retryAfter ? Math.ceil(parseFloat(retryAfter) * 1000) + 500 : 10000;
+    await sleep(waitMs);
+    return query(prompt, json, retries - 1);
+  }
 
   if (!res.ok) {
     const err = await res.text();
