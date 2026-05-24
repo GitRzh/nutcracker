@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { serverComponentsExternalPackages: ["jszip"] }
+  serverExternalPackages: ["jszip"]
 };
 module.exports = nextConfig;
